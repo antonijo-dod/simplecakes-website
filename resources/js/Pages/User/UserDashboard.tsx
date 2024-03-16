@@ -19,6 +19,9 @@ export default function Welcome({
             <h1 className="text-3xl font-bold text-center mt-8">
                 Welcome to the User Dashboard
             </h1>
+            <div className="container mx-auto">
+                <p className="text-center mt-4">{auth.user.name}</p>
+            </div>
         </>
     );
 }

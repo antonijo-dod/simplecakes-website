@@ -32,7 +32,7 @@ Route::get('/', [RecipeController::class, 'index'])->name('home');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified', 'admin'])->name('dashboard');
 
 Route::resource("adminRecipes", AdminRecipeController::class)
     ->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy'])
