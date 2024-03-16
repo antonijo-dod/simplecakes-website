@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\Admin\AdminRecipeController;
+use App\Http\Controllers\User\UserRecipeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -34,6 +35,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource("adminRecipes", AdminRecipeController::class)
+    ->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy'])
+    ->middleware('auth');
+
+Route::resource("user-recipes", UserRecipeController::class)
     ->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy'])
     ->middleware('auth');
 
