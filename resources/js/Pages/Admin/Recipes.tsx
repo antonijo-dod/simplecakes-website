@@ -67,7 +67,7 @@ const RecipeTable = ({ recipes }: { recipes: Recipes }) => {
                                     {recipe.name}
                                 </Link>
                             </td>
-                            <td>{recipe.name}</td>
+                            <td>{recipe.user.name}</td>
                             <td>{recipe.status}</td>
                         </tr>
                     ))}

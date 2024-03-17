@@ -16,7 +16,8 @@ class AdminRecipeController extends Controller
     public function index()
     {
          // Get all recipes from the database, but new recipes first
-        $recipes = Recipe::latest()->get();
+        // $recipes = Recipe::latest()->get();
+        $recipes = Recipe::latest()->with('user')->get();
        
          return Inertia::render('Admin/Recipes', [
              'recipes' => $recipes,
