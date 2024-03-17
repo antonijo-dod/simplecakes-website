@@ -1,6 +1,3 @@
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head } from "@inertiajs/react";
-import { PageProps } from "@/types";
 import { User } from "@/types";
 import { Link } from "@inertiajs/react";
 import Dropdown from "@/Components/Dropdown";
@@ -12,7 +9,6 @@ export default function PageHeader({
         user: User;
     };
 }) {
-    console.log("🚀 ~ user:", auth.user);
     return (
         <div className="navbar bg-base-100 container mx-auto">
             <div className="navbar-start">
