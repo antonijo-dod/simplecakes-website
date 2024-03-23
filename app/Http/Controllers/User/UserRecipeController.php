@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Recipe;
 use Inertia\Inertia;
@@ -14,8 +15,8 @@ class UserRecipeController extends Controller
      */
     public function index()
     {
-         // Get all recipes from the database
-         $recipes = Recipe::where('status', 'published')->latest()->get();
+        
+        $recipes = Recipe::where('user_id', auth()->id())->latest()->get();
        
          return Inertia::render('User/UserDashboard', [
              'recipes' => $recipes,
