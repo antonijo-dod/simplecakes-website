@@ -6,20 +6,20 @@ use Illuminate\Http\Request;
 use App\Models\Recipe;
 use Inertia\Inertia;
 
-class RecipeController extends Controller
+class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // Get all recipes from the database
-        $recipes = Recipe::where('status', 'published')->latest()->get();
-       
+        // return the last 6 recipes
+        $recipes = Recipe::latest()->take(6)->get();
+        
         return Inertia::render('Home', [
             'recipes' => $recipes,
         ]);
-       
+
     }
 
     /**
@@ -41,13 +41,9 @@ class RecipeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $slug)
+    public function show(string $id)
     {
-        // Get single recipe from the database by slug
-        $recipe = Recipe::where('slug', $slug)->firstOrFail();
-        return Inertia::render('Recipe', [
-            'recipe' => $recipe,
-        ]);
+        //
     }
 
     /**

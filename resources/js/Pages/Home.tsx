@@ -1,4 +1,4 @@
-import { Head } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import { PageProps } from "@/types";
 import { Recipes } from "@/types/recipes";
 import Header from "@/Components/Header";
@@ -39,9 +39,12 @@ export default function Welcome({
                                         </h2>
                                         <p>{recipe.description}</p>
                                         <div className="card-actions justify-end">
-                                            <button className="btn btn-primary">
+                                            <Link
+                                                className="link "
+                                                href={route("recipes.show", recipe.slug)}
+                                            >
                                                 Read more
-                                            </button>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
