@@ -19,6 +19,7 @@ class RecipeFactory extends Factory
         return [
             'name' => fake()->catchPhrase(),
             'slug' => fake()->slug(),
+            'description' => fake()->sentence(),
             'steps' => json_encode([
                 'Mix flour, sugar, baking powder, and salt in a bowl.',
                 'Whisk egg, milk, and butter in another bowl.',

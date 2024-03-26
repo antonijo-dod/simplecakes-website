@@ -36,18 +36,18 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified', 'admin'])->name('dashboard');
 
-// Route::middleware(['auth', 'admin'])->group(function () {
-//     Route::get('/recipes', [AdminRecipeController::class, 'index'])->name('adminRecipes.index');
-//     Route::get('/recipes/create', [AdminRecipeController::class, 'create'])->name('adminRecipes.create');
-//     Route::post('/recipes', [AdminRecipeController::class, 'store'])->name('adminRecipes.store');
-//     Route::get('/recipes/{recipe}', [AdminRecipeController::class, 'show'])->name('adminRecipes.show');
-//     Route::get('/recipes/{recipe}/edit', [AdminRecipeController::class, 'edit'])->name('adminRecipes.edit');
-//     Route::patch('/recipes/{recipe}', [AdminRecipeController::class, 'update'])->name('adminRecipes.update');
-//     Route::delete('/recipes/{recipe}', [AdminRecipeController::class, 'destroy'])->name('adminRecipes.destroy');
-// });
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/recipes', [AdminRecipeController::class, 'index'])->name('adminRecipes.index');
+    Route::get('/admin/recipes/create', [AdminRecipeController::class, 'create'])->name('adminRecipes.create');
+    Route::post('/admin/recipes', [AdminRecipeController::class, 'store'])->name('adminRecipes.store');
+    Route::get('/admin/recipes/{recipe}', [AdminRecipeController::class, 'show'])->name('adminRecipes.show');
+    Route::get('/admin/recipes/{recipe}/edit', [AdminRecipeController::class, 'edit'])->name('adminRecipes.edit');
+    Route::patch('/admin/recipes/{recipe}', [AdminRecipeController::class, 'update'])->name('adminRecipes.update');
+    Route::delete('/admin/recipes/{recipe}', [AdminRecipeController::class, 'destroy'])->name('adminRecipes.destroy');
+});
 
 
-Route::resource("user-recipes", UserRecipeController::class)
+Route::resource("/user/user-recipes", UserRecipeController::class)
     ->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy'])
     ->middleware('auth');
 

@@ -28,7 +28,8 @@ class UserRecipeController extends Controller
      */
     public function create()
     {
-        //
+        // Crete a new recipe
+        return Inertia::render('User/CreateRecipe');
     }
 
     /**
@@ -36,7 +37,21 @@ class UserRecipeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Store the recipe in the database
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $recipe = Recipe::create([
+            'name' => $request->name,
+            'slug' => \Str::slug($request->name),
+            'description' => $request->description,
+            'steps' => $request->steps,
+            'status' => 'draft',
+            'user_id' => auth()->id(),
+        ]);
+
+        return redirect()->route('user-recipes.index');
     }
 
     /**
@@ -44,7 +59,7 @@ class UserRecipeController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Show
     }
 
     /**
@@ -52,7 +67,12 @@ class UserRecipeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // Show the form for editing the recipe
+        $recipe = Recipe::findOrFail($id);
+        
+        return Inertia::render('User/EditRecipe', [
+            'recipe' => $recipe,
+        ]);
     }
 
     /**
@@ -60,7 +80,19 @@ class UserRecipeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Update the recipe
+        $recipe = Recipe::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'name' => 'required'
+        ]);
+
+        $validatedData['slug'] = \Str::slug($validatedData['name']); // TODO - Add unique slug
+
+        $recipe->update($validatedData);
+
+        return redirect()->back()->with('message', 'Recipe updated successfully.');
+
     }
 
     /**

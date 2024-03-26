@@ -27,6 +27,14 @@ export default function Welcome({
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="overflow-x-auto">
+                            <div className="flex justify-end">
+                                <Link
+                                    href={route("user-recipes.create")}
+                                    className="btn btn-primary"
+                                >
+                                    Create Recipe
+                                </Link>
+                            </div>
                             {/* Render all posts, but first check does the recipes is not undefined or null, and if the array is emppty show no posts, and if they exist just render them */}
                             {recipes ? (
                                 recipes.length === 0 ? (
@@ -55,21 +63,23 @@ const RecipeTable = ({ recipes }: { recipes: Recipes }) => {
                         <th></th>
                         <th>Name</th>
                         <th>Status</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {recipes.map((recipe) => (
                         <tr key={recipe.id}>
                             <th>{recipe.id}</th>
+                            <td>{recipe.name}</td>
+                            <td>{recipe.status}</td>
                             <td>
                                 <Link
-                                    className="link "
-                                    href={route("adminRecipes.edit", recipe.id)}
+                                    href={route("user-recipes.edit", recipe.id)}
+                                    className="btn btn-sm"
                                 >
-                                    {recipe.name}
+                                    Edit
                                 </Link>
                             </td>
-                            <td>{recipe.status}</td>
                         </tr>
                     ))}
                 </tbody>

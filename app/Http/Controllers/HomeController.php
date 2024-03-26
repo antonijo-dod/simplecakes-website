@@ -14,7 +14,7 @@ class HomeController extends Controller
     public function index()
     {
         // return the last 6 recipes
-        $recipes = Recipe::latest()->take(6)->get();
+        $recipes = Recipe::where("status", "published")->latest()->take(6)->get();
         
         return Inertia::render('Home', [
             'recipes' => $recipes,

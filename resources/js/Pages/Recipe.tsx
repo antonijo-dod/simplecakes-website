@@ -1,15 +1,26 @@
 import { Head } from "@inertiajs/react";
 import { PageProps } from "@/types";
-import { Recipes } from "@/types/recipes";
 import Header from "@/Components/Header";
+
+type Recipe = {
+    id: number;
+    name: string;
+    description: string;
+    ingredients: string;
+    steps: string;
+    image: string;
+    user_id: number;
+    created_at: string;
+    updated_at: string;
+};
 
 export default function Welcome({
     auth,
-    recipes,
+    recipe,
 }: PageProps<{
     laravelVersion: string;
     phpVersion: string;
-    recipes: Recipes;
+    recipe: Recipe;
 }>) {
     return (
         <>
@@ -17,7 +28,8 @@ export default function Welcome({
 
             <Header auth={auth} />
             <div className="container mx-auto">
-                <h1>Recipe single</h1>
+                <h1>Recipe title: <b>{recipe.name}</b></h1>
+                <p>Recipe description: {recipe.description}</p>
             </div>
         </>
     );
