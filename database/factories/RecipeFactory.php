@@ -31,7 +31,7 @@ class RecipeFactory extends Factory
                 'Repeat with remaining batter.',
             ]),
             'status' => fake()->randomElement(['draft', 'published', 'archived']),
-            'user_id' => fake()->numberBetween(1, 10),
+            'user_id' => fake()->numberBetween(1, 20),
         ];
     }
 }
