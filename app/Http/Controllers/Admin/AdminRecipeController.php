@@ -17,7 +17,14 @@ class AdminRecipeController extends Controller
     {
          // Get all recipes from the database, but new recipes first
         // $recipes = Recipe::latest()->get();
-        $recipes = Recipe::latest()->with('user')->get();
+        $sortField = request('sortField', "");
+        $sortDirection = request('sortDirection', "");
+
+        if ($sortField && $sortDirection) {
+            $recipes = Recipe::orderBy($sortField, $sortDirection)->latest()->with('user')->paginate(10);
+        } else {
+            $recipes = Recipe::latest()->with('user')->paginate(10);
+        }
        
          return Inertia::render('Admin/Recipes', [
              'recipes' => $recipes,

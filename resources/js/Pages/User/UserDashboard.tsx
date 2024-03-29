@@ -11,7 +11,6 @@ export default function Welcome({
     phpVersion: string;
     recipes: Recipes;
 }>) {
-    console.log(recipes);
     return (
         <>
             <Head title="User dashboard" />
