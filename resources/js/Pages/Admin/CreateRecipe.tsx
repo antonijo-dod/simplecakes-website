@@ -20,6 +20,9 @@ export default function CreateRecipe({
         post(route("adminRecipes.store"), { onSuccess: () => reset() });
     };
 
+    // follow the state of the ingredients
+    
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -52,6 +55,22 @@ export default function CreateRecipe({
                                     value={data.name}
                                     onChange={(e) =>
                                         setData("name", e.target.value)
+                                    }
+                                />
+                            </label>
+                            <label className="form-control w-full max-w-xs">
+                                <div className="label">
+                                    <span className="label-text">
+                                        Recipe name
+                                    </span>
+                                </div>
+                                <input
+                                    type="text"
+                                    placeholder="Type here"
+                                    className="input input-bordered w-full max-w-xs"
+                                    value={data.description}
+                                    onChange={(e) =>
+                                        setData("description", e.target.value)
                                     }
                                 />
                             </label>

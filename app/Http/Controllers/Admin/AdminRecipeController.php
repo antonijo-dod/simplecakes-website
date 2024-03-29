@@ -48,13 +48,17 @@ class AdminRecipeController extends Controller
         // Create a new recipe
         $validatedData = $request->validate([
             'name' => 'required',
+            'description' => 'required',
         ]);
 
-        // Add slug and user_id to the validated data
-        $validatedData['slug'] = \Str::slug($validatedData['name']); // TODO - Add unique slug
-        $validatedData['user_id'] = $request->user()->id;
-
-        Recipe::create($validatedData);
+        $recipe = Recipe::create([
+            'name' => $request->name,
+            'slug' => \Str::slug($request->name),
+            'description' => $request->description,
+            'steps' => $request->steps,
+            'status' => 'draft',
+            'user_id' => auth()->id(),
+        ]);
 
         return redirect()->back()->with('message', 'Recipe created successfully.');
     }
